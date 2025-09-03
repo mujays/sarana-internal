@@ -12,7 +12,7 @@ export default function RProtectedLayout({
       <SidebarProvider>
         <div className="flex w-full">
           <AppSidebar />
-          <div className="grow bg-primary/5">
+          <div className="grow bg-whit overflow-x-hidden">
             <AppNavbar />
             <section>{children}</section>
           </div>

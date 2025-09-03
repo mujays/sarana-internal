@@ -4,6 +4,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
+import AntdProvider from "@/providers/antd-provider";
 
 export const metadata: Metadata = {
   title: "Your App",
@@ -20,9 +21,11 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <QueryProvider>
           <AntdRegistry>
-            <NextTopLoader />
-            <div>{children}</div>
-            <Toaster richColors position="top-right" />
+            <AntdProvider>
+              <NextTopLoader />
+              <div>{children}</div>
+              <Toaster richColors position="top-right" />
+            </AntdProvider>
           </AntdRegistry>
         </QueryProvider>
       </body>

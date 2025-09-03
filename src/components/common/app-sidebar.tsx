@@ -32,8 +32,8 @@ export function AppSidebar() {
     <Sidebar className="bg-red-300">
       <SidebarContent>
         <SidebarHeader className="flex justify-center items-center">
-          <div className="w-[180px] text-2xl font-semibold flex justify-center mt-10">
-            Internal App
+          <div className="text-center font-semibold flex justify-center my-3">
+            Levera Technology Group
           </div>
         </SidebarHeader>
         <SidebarGroup>

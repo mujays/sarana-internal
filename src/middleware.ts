@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  const accessToken = request.cookies.get("session");
+  const accessToken = request.cookies.get("session_internal");
 
   if (request.nextUrl.pathname === "/login") {
     if (accessToken) {

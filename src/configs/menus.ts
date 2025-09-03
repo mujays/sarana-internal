@@ -1,4 +1,10 @@
-import { Home, UsersRoundIcon } from "lucide-react";
+import {
+  Gauge,
+  LayoutGrid,
+  NotepadTextIcon,
+  UserIcon,
+  UsersRoundIcon,
+} from "lucide-react";
 
 export const getMenus = (pathName: string) => {
   if (pathName.startsWith("/user-management")) {
@@ -15,7 +21,22 @@ export const getMenus = (pathName: string) => {
     {
       title: "Dashboard",
       url: "/",
-      icon: Home,
+      icon: Gauge,
+    },
+    {
+      title: "Apps",
+      url: "/app",
+      icon: LayoutGrid,
+    },
+    {
+      title: "Plan",
+      url: "/plan",
+      icon: NotepadTextIcon,
+    },
+    {
+      title: "Client",
+      url: "/client",
+      icon: UserIcon,
     },
   ];
 };
