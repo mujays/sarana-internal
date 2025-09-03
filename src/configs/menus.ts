@@ -1,7 +1,9 @@
 import {
+  ChartSpline,
   Gauge,
   LayoutGrid,
   NotepadTextIcon,
+  SquareMenu,
   UserIcon,
   UsersRoundIcon,
 } from "lucide-react";
@@ -37,6 +39,16 @@ export const getMenus = (pathName: string) => {
       title: "Client",
       url: "/client",
       icon: UserIcon,
+    },
+    {
+      title: "Transaksi",
+      url: "/transaction",
+      icon: ChartSpline,
+    },
+    {
+      title: "Settlement",
+      url: "/settlement",
+      icon: SquareMenu,
     },
   ];
 };

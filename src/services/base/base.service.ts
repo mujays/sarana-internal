@@ -2,9 +2,31 @@
 
 import axiosConfig from "@/configs/axios";
 import { BaseResponseDto, BaseResponsePaginate } from "@/types/response";
-import { AppType, ClientType, PlanType } from "./base.dto";
+import {
+  AppType,
+  ClientType,
+  PlanType,
+  SettlementType,
+  TransactionType,
+} from "./base.dto";
 
 const BaseService = {
+  getTransaction: async (params: any) => {
+    const response = await axiosConfig.get<
+      BaseResponsePaginate<TransactionType[]>
+    >("/admin/finance/transaction", {
+      params,
+    });
+    return response.data;
+  },
+  getSettlement: async (params: any) => {
+    const response = await axiosConfig.get<
+      BaseResponsePaginate<SettlementType[]>
+    >("/admin/settlement", {
+      params,
+    });
+    return response.data;
+  },
   getPlan: async (params: any) => {
     const response = await axiosConfig.get<BaseResponsePaginate<PlanType[]>>(
       "/plan",
