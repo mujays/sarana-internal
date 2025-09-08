@@ -29,6 +29,7 @@ export type TransactionType = {
   net_payment: number;
   status: string;
   transaction_log: string;
+  client: ClientType;
 };
 
 export type SettlementType = {
@@ -40,6 +41,7 @@ export type SettlementType = {
   xendit_payout_id: string;
   xendit_payout_refences_id: null | string;
   status: string;
+  client: ClientType;
   created_at: string;
   updated_at: string;
 };

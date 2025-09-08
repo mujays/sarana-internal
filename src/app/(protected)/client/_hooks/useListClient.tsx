@@ -7,6 +7,7 @@ import { useState } from "react";
 import ActionTable from "@/components/common/action-table";
 import errorResponse from "@/lib/error";
 import { toast } from "sonner";
+import { ClientDetail } from "../_components/client-detail";
 
 type Props = {
   page: number;
@@ -50,7 +51,7 @@ function useListClient({ limit, page }: Props) {
   const columns: TableProps<ClientType>["columns"] = [
     {
       title: "No",
-      dataIndex: "no",
+      dataIndex: "id",
       render: (text: string) => <Typography.Text>{text}</Typography.Text>,
       align: "center",
     },
@@ -95,6 +96,7 @@ function useListClient({ limit, page }: Props) {
               setIsOpenForm(true);
             }}
             onDelete={() => onDelete(record.id)}
+            componentDetail={<ClientDetail clientData={record} />}
           />
         );
       },

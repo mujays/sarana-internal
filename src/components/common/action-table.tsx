@@ -1,14 +1,15 @@
 import { SquarePen } from "lucide-react";
 import { DeleteModal } from "./delete-modal";
+import React from "react";
 
 function ActionTable({
   onEdit,
   onDelete,
-  onDetail,
+  componentDetail,
 }: {
   onEdit?: () => void;
   onDelete?: () => Promise<void>;
-  onDetail?: () => void;
+  componentDetail?: React.ReactNode;
 }) {
   return (
     <div className="flex gap-2">
@@ -22,14 +23,7 @@ function ActionTable({
         </div>
       )}
       {onDelete && <DeleteModal onConfirm={onDelete} />}
-      {onDetail && (
-        <div
-          onClick={onDetail}
-          className="flex gap-2 cursor-pointer text-[#8B5CF6]"
-        >
-          Detail
-        </div>
-      )}
+      {componentDetail && componentDetail}
     </div>
   );
 }

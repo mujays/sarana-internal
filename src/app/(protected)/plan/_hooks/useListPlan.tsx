@@ -9,6 +9,7 @@ import { useState } from "react";
 import ActionTable from "@/components/common/action-table";
 import errorResponse from "@/lib/error";
 import { toast } from "sonner";
+import { PlanDetail } from "../_components/plan-detail";
 
 type Props = {
   page: number;
@@ -93,6 +94,7 @@ function useListPlan({ limit, page }: Props) {
               setIsOpenForm(true);
             }}
             onDelete={() => onDelete(record.id)}
+            componentDetail={<PlanDetail planData={record} />}
           />
         );
       },

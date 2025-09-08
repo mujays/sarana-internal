@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@tanstack/react-query";
-import { TableProps, Typography } from "antd";
+import { TableProps, Tag, Typography } from "antd";
 import BaseService from "@/services/base/base.service";
 import { TransactionType } from "@/services/base/base.dto";
+import { formatCurrency } from "@/lib/utils";
+import ActionTable from "@/components/common/action-table";
+import { TransactionDetail } from "../_components/transaction-detail";
 
 function useListTransaction({ page = 1, pageSize = 10 } = {}) {
   const { data: transactions, isLoading } = useQuery({
@@ -11,6 +14,7 @@ function useListTransaction({ page = 1, pageSize = 10 } = {}) {
       const response = await BaseService.getTransaction({
         page_size: pageSize,
         page,
+        with: "client",
       });
       return response;
     },
@@ -33,9 +37,9 @@ function useListTransaction({ page = 1, pageSize = 10 } = {}) {
       align: "center",
     },
     {
-      title: "Client ID",
-      dataIndex: "client_id",
-      render: (value = "") => <p>{value}</p>,
+      title: "Client",
+      dataIndex: "client",
+      render: (value) => <p>{value?.nama || "-"}</p>,
     },
     {
       title: "Transaction ID",
@@ -50,12 +54,34 @@ function useListTransaction({ page = 1, pageSize = 10 } = {}) {
     {
       title: "Net Payment",
       dataIndex: "net_payment",
-      render: (value = "") => <p>{value}</p>,
+      render: (value = "") => <p>{formatCurrency(value)}</p>,
     },
     {
       title: "Status",
       dataIndex: "status",
-      render: (value = "") => <p>{value}</p>,
+      render: (value = "") =>
+        value.toLowerCase() === "berhasil" ? (
+          <Tag color="green" className="capitalize">
+            {value}
+          </Tag>
+        ) : value.toLowerCase() === "pending" ? (
+          <Tag color="orange" className="capitalize">
+            {value}
+          </Tag>
+        ) : (
+          <Tag color="red" className="capitalize">
+            {value}
+          </Tag>
+        ),
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      render: (value, record) => (
+        <ActionTable
+          componentDetail={<TransactionDetail transactionData={record} />}
+        />
+      ),
     },
   ];
 

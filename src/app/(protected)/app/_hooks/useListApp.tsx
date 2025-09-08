@@ -7,6 +7,7 @@ import ActionTable from "@/components/common/action-table";
 import { useRouter } from "next/navigation";
 import errorResponse from "@/lib/error";
 import { toast } from "sonner";
+import { AppDetail } from "../_components/app-detail";
 
 function useListApp() {
   const router = useRouter();
@@ -78,6 +79,7 @@ function useListApp() {
           <ActionTable
             onEdit={() => router.push(`/app/${record.id}/edit`)}
             onDelete={() => onDelete(record.id)}
+            componentDetail={<AppDetail appData={record} />}
           />
         );
       },
