@@ -1,11 +1,11 @@
 "use client";
 import { Button, Table } from "antd";
 import AppBreadcrumbs from "@/components/common/app-breadcrums";
-import useListSettlement from "./_hooks/useListSettlement";
+import useListWithdrawal from "./_hooks/useListWithdrawal";
 import { useState } from "react";
-import FormSettlement from "./_components/form-settlement";
+import FormWithdrawal from "./_components/form-withdrawal";
 
-function SettlementPage() {
+function WithdrawalPage() {
   const [pagination, setPagination] = useState({
     page: 1,
     pageSize: 10,
@@ -13,12 +13,12 @@ function SettlementPage() {
   const {
     columns,
     isLoading,
-    settlements,
+    withdrawals,
     existingId,
     isOpenForm,
     setIsOpenForm,
     setExistingId,
-  } = useListSettlement({
+  } = useListWithdrawal({
     page: pagination.page,
     pageSize: pagination.pageSize,
   });
@@ -28,29 +28,29 @@ function SettlementPage() {
         <AppBreadcrumbs
           items={[
             { title: "Home", url: "/" },
-            { title: "Settlement", url: "#" },
+            { title: "Withdrawal", url: "#" },
           ]}
         />
       </div>
       <div className="bg-white p-4 rounded-lg space-y-4">
         <div className="border-b pb-3">
           <div className="flex justify-between">
-            <p className="text-xl font-medium">Settlement</p>
+            <p className="text-xl font-medium">Withdrawal</p>
             <Button onClick={() => setIsOpenForm(true)}>
-              Tambah Settlement
+              Tambah Withdrawal
             </Button>
           </div>
         </div>
         <div className="overflow-auto">
           <Table
             columns={columns}
-            dataSource={settlements?.data}
+            dataSource={withdrawals?.data}
             loading={isLoading}
             pagination={{
               onChange: (page, pageSize) => {
                 setPagination({ page, pageSize });
               },
-              total: settlements?.meta?.total,
+              total: withdrawals?.meta?.total,
               pageSize: pagination.pageSize,
               current: pagination.page,
               position: ["bottomCenter"],
@@ -59,7 +59,7 @@ function SettlementPage() {
           />
         </div>
       </div>
-      <FormSettlement
+      <FormWithdrawal
         close={() => {
           setIsOpenForm(false);
           setExistingId(null);
@@ -71,4 +71,4 @@ function SettlementPage() {
   );
 }
 
-export default SettlementPage;
+export default WithdrawalPage;

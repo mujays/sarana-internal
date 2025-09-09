@@ -24,7 +24,7 @@ export default function RootLayout({
             <AntdProvider>
               <NextTopLoader />
               <div>{children}</div>
-              <Toaster richColors position="top-right" />
+              <Toaster richColors position="top-right" theme="light" />
             </AntdProvider>
           </AntdRegistry>
         </QueryProvider>

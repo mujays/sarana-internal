@@ -1,4 +1,5 @@
 import {
+  BanknoteIcon,
   ChartSpline,
   Gauge,
   LayoutGrid,
@@ -49,6 +50,11 @@ export const getMenus = (pathName: string) => {
       title: "Settlement",
       url: "/settlement",
       icon: SquareMenu,
+    },
+    {
+      title: "Withdrawal",
+      url: "/withdrawal",
+      icon: BanknoteIcon,
     },
   ];
 };

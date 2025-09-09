@@ -67,3 +67,17 @@ export type ClientType = {
   created_at: string;
   updated_at: string;
 };
+
+export type WithdrawalType = {
+  id: number;
+  client_id: number;
+  status: string;
+  by: string;
+  url: string;
+  jumlah: number;
+  biaya_penarikan: number;
+  ditransfer_oleh: string | null;
+  tanggal_transfer: string | null;
+  created_at: string;
+  updated_at: string;
+};

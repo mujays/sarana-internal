@@ -3,20 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { TableProps, Tag, Typography } from "antd";
 import BaseService from "@/services/base/base.service";
-import { SettlementType } from "@/services/base/base.dto";
+import { WithdrawalType } from "@/services/base/base.dto";
 import ActionTable from "@/components/common/action-table";
-import { SettlementDetail } from "../_components/settlement-detail";
 import { toast } from "sonner";
 import errorResponse from "@/lib/error";
 
-function useListSettlement({ page = 1, pageSize = 10 } = {}) {
-  const { data: settlements, isLoading } = useQuery({
-    queryKey: ["SETTLEMENTS", page, pageSize],
+function useListWithdrawal({ page = 1, pageSize = 10 } = {}) {
+  const { data: withdrawals, isLoading } = useQuery({
+    queryKey: ["WITHDRAWALS", page, pageSize],
     queryFn: async () => {
-      const response = await BaseService.getSettlement({
+      const response = await BaseService.getWithdrawal({
         page_size: pageSize,
         page,
-        with: "client",
       });
       return response;
     },
@@ -36,15 +34,15 @@ function useListSettlement({ page = 1, pageSize = 10 } = {}) {
 
   const onDelete = async (id: number) => {
     try {
-      await BaseService.deleteClient(id);
+      await BaseService.deleteWithdrawal(id);
       setExistingId(null);
-      toast.success("Settlement berhasil dihapus");
+      toast.success("Withdrawal berhasil dihapus");
     } catch (error: any) {
       errorResponse(error);
     }
   };
 
-  const columns: TableProps<SettlementType>["columns"] = [
+  const columns: TableProps<WithdrawalType>["columns"] = [
     {
       title: "No",
       dataIndex: "no",
@@ -54,21 +52,6 @@ function useListSettlement({ page = 1, pageSize = 10 } = {}) {
     {
       title: "Jumlah",
       dataIndex: "jumlah",
-      render: (value = "") => <p>{value}</p>,
-    },
-    {
-      title: "By",
-      dataIndex: "by",
-      render: (value) => <p>{value || "-"}</p>,
-    },
-    {
-      title: "Metode",
-      dataIndex: "xendit_payout_id",
-      render: (value) => <p>{!value ? "Manual" : "Xendit"}</p>,
-    },
-    {
-      title: "Tujuan",
-      dataIndex: "tujuan",
       render: (value = "") => <p>{value}</p>,
     },
     {
@@ -103,7 +86,6 @@ function useListSettlement({ page = 1, pageSize = 10 } = {}) {
             setIsOpenForm(true);
           }}
           onDelete={() => onDelete(record.id)}
-          componentDetail={<SettlementDetail settlementData={record} />}
         />
       ),
     },
@@ -112,7 +94,7 @@ function useListSettlement({ page = 1, pageSize = 10 } = {}) {
   return {
     columns,
     isLoading,
-    settlements,
+    withdrawals,
     isOpenForm,
     setIsOpenForm,
     existingId,
@@ -120,4 +102,4 @@ function useListSettlement({ page = 1, pageSize = 10 } = {}) {
   };
 }
 
-export default useListSettlement;
+export default useListWithdrawal;

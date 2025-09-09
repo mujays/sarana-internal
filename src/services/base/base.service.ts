@@ -8,6 +8,7 @@ import {
   PlanType,
   SettlementType,
   TransactionType,
+  WithdrawalType,
 } from "./base.dto";
 
 const BaseService = {
@@ -25,6 +26,32 @@ const BaseService = {
     >("/admin/settlement", {
       params,
     });
+    return response.data;
+  },
+  getSettlementOne: async (id: number) => {
+    const response = await axiosConfig.get<BaseResponseDto<SettlementType>>(
+      `/admin/settlement/${id}`
+    );
+    return response.data;
+  },
+  addSettlement: async (payload: any) => {
+    const response = await axiosConfig.post<BaseResponseDto<SettlementType>>(
+      "/admin/settlement",
+      payload
+    );
+    return response.data;
+  },
+  updateSettlement: async (settlementId: number, payload: any) => {
+    const response = await axiosConfig.put<BaseResponseDto<SettlementType>>(
+      `/admin/settlement/${settlementId}`,
+      payload
+    );
+    return response.data;
+  },
+  deleteSettlement: async (settlementId: number) => {
+    const response = await axiosConfig.delete<BaseResponseDto<SettlementType>>(
+      `/admin/settlement/${settlementId}`
+    );
     return response.data;
   },
   getPlan: async (params: any) => {
@@ -97,6 +124,43 @@ const BaseService = {
   getOneClient: async (clientId: number, params?: any) => {
     const response = await axiosConfig.get<BaseResponseDto<ClientType>>(
       `/client/${clientId}`,
+      {
+        params,
+      }
+    );
+    return response.data;
+  },
+  getWithdrawal: async (params: any) => {
+    const response = await axiosConfig.get<
+      BaseResponsePaginate<WithdrawalType[]>
+    >("/admin/withdrawal", {
+      params,
+    });
+    return response.data;
+  },
+  addWithdrawal: async (payload: any) => {
+    const response = await axiosConfig.post<BaseResponseDto<WithdrawalType>>(
+      "/admin/withdrawal",
+      payload
+    );
+    return response.data;
+  },
+  updateWithdrawal: async (withdrawalId: number, payload: any) => {
+    const response = await axiosConfig.put<BaseResponseDto<WithdrawalType>>(
+      `/admin/withdrawal/${withdrawalId}`,
+      payload
+    );
+    return response.data;
+  },
+  deleteWithdrawal: async (withdrawalId: number) => {
+    const response = await axiosConfig.delete<BaseResponseDto<WithdrawalType>>(
+      `/admin/withdrawal/${withdrawalId}`
+    );
+    return response.data;
+  },
+  getOneWithdrawal: async (withdrawalId: number, params?: any) => {
+    const response = await axiosConfig.get<BaseResponseDto<WithdrawalType>>(
+      `/withdrawal/${withdrawalId}`,
       {
         params,
       }
