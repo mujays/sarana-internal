@@ -32,7 +32,7 @@ export function AppDetail({ appData }: { appData: AppType }) {
         okText="Tutup"
         onOk={handleClose}
       >
-        <div className="grid grid-cols-2 mb-3">
+        <div className="grid grid-cols-2 gap-2 mb-3">
           <div>
             <p className="font-semibold">Nama App</p>
             <p>{appData?.name}</p>

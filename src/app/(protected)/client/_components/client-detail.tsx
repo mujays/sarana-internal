@@ -38,6 +38,10 @@ export function ClientDetail({ clientData }: { clientData: ClientType }) {
             <p>{clientData?.nama}</p>
           </div>
           <div>
+            <p className="font-semibold">Xendit ID</p>
+            <p>{clientData?.xendit_customer_id}</p>
+          </div>
+          <div>
             <p className="font-semibold">Email</p>
             <p>{clientData?.email || "-"}</p>
           </div>

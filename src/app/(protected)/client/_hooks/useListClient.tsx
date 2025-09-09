@@ -51,6 +51,12 @@ function useListClient({ limit, page }: Props) {
   const columns: TableProps<ClientType>["columns"] = [
     {
       title: "No",
+      dataIndex: "no",
+      render: (text: string) => <Typography.Text>{text}</Typography.Text>,
+      align: "center",
+    },
+    {
+      title: "Client ID",
       dataIndex: "id",
       render: (text: string) => <Typography.Text>{text}</Typography.Text>,
       align: "center",

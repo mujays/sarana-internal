@@ -177,7 +177,7 @@ function FormApp({ existingId }: { existingId?: number | null }) {
                 </Form.Item>
 
                 <Form.Item
-                  label="Durasi Proyek (Hari)"
+                  label="Durasi Langganan (Hari)"
                   name="planDuration"
                   className="w-full !mb-2"
                   rules={[{ required: true, message: "Durasi harus diisi" }]}
