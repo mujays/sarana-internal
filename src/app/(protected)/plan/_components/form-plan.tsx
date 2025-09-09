@@ -67,7 +67,6 @@ function FormPlan({
 
   useEffect(() => {
     if (existingId && plan) {
-      console.log({ plan });
       form.setFieldsValue({
         name: plan.data.name,
         description: plan.data?.description || "",
