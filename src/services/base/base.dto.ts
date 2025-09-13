@@ -81,3 +81,13 @@ export type WithdrawalType = {
   created_at: string;
   updated_at: string;
 };
+
+export type SubscribeType = {
+  id: number;
+  client_id: number;
+  plan_id: number;
+  status: string;
+  start_date: string;
+  end_date: string;
+  expired_finance: string;
+};

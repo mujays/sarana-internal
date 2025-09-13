@@ -7,11 +7,20 @@ import {
   ClientType,
   PlanType,
   SettlementType,
+  SubscribeType,
   TransactionType,
   WithdrawalType,
 } from "./base.dto";
 
 const BaseService = {
+  getSubs: async (params: any) => {
+    const response = await axiosConfig.get<
+      BaseResponsePaginate<SubscribeType[]>
+    >("/admin/subsription", {
+      params,
+    });
+    return response.data;
+  },
   getTransaction: async (params: any) => {
     const response = await axiosConfig.get<
       BaseResponsePaginate<TransactionType[]>
