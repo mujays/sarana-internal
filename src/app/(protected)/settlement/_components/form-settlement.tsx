@@ -20,6 +20,17 @@ function FormSettlement({
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
 
+  const { data: clients } = useQuery({
+    queryKey: ["CLIENTS"],
+    queryFn: async () => {
+      const response = await BaseService.getClient({
+        page_size: 50,
+        page: 1,
+      });
+      return response;
+    },
+  });
+
   const { data: settlement, isLoading } = useQuery({
     queryKey: ["SETTLEMENT", existingId],
     enabled: !!existingId,
@@ -123,6 +134,20 @@ function FormSettlement({
               { label: "Pending", value: "pending" },
               { label: "Succeeded", value: "succeeded" },
             ]}
+          />
+        </Form.Item>
+        <Form.Item
+          name="client_id"
+          label="Client"
+          className="!mb-2 w-full"
+          rules={[{ required: true, message: "Status harus diisi" }]}
+        >
+          <Select
+            placeholder="Pilih Client"
+            options={clients?.data.map((val) => ({
+              label: val.nama,
+              value: val.id,
+            }))}
           />
         </Form.Item>
       </Form>

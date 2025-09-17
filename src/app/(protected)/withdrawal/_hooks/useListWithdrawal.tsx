@@ -58,7 +58,7 @@ function useListWithdrawal({ page = 1, pageSize = 10 } = {}) {
       title: "Status",
       dataIndex: "status",
       render: (value = "") =>
-        value.toLowerCase() === "accepted" ? (
+        value.toLowerCase() === "berhasil" ? (
           <Tag color="green" className="capitalize">
             {value}
           </Tag>

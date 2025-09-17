@@ -90,9 +90,12 @@ function FormApp({ existingId }: { existingId?: number | null }) {
 
   useEffect(() => {
     if (existingId && app) {
+      console.log({ app });
       form.setFieldsValue({
         name: app.data.name,
         description: app.data?.deskripsi || "",
+        kode: app.data?.kode || "",
+        jenis: app.data?.jenis || "",
       });
     }
   }, [existingId, app]);
@@ -163,197 +166,209 @@ function FormApp({ existingId }: { existingId?: number | null }) {
               />
             </Form.Item>
           </div>
-          {[APP_TYPE.SAAS, APP_TYPE.ENTERPRISE].includes(jenis) && (
-            <div className="mt-4 border rounded-lg p-4 space-y-3">
-              <p className="font-semibold text-xl">Rancangan</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3">
-                <Form.Item
-                  label="Nama"
-                  name="planName"
-                  className="w-full !mb-2"
-                  rules={[{ required: true, message: "Nama Plan harus diisi" }]}
-                >
-                  <Input placeholder="Nama" />
-                </Form.Item>
+          {!existingId &&
+            [APP_TYPE.SAAS, APP_TYPE.ENTERPRISE].includes(jenis) && (
+              <div className="mt-4 border rounded-lg p-4 space-y-3">
+                <p className="font-semibold text-xl">Rancangan</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3">
+                  <Form.Item
+                    label="Nama"
+                    name="planName"
+                    className="w-full !mb-2"
+                    rules={[
+                      { required: true, message: "Nama Plan harus diisi" },
+                    ]}
+                  >
+                    <Input placeholder="Nama" />
+                  </Form.Item>
 
-                <Form.Item
-                  label="Durasi Langganan (Hari)"
-                  name="planDuration"
-                  className="w-full !mb-2"
-                  rules={[{ required: true, message: "Durasi harus diisi" }]}
-                >
-                  <Input
-                    className="!w-full"
-                    min={0}
-                    placeholder="Masukkan durasi"
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      form.setFieldsValue({ planDuration: value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Durasi Keuangan"
-                  name="planDurationFinance"
-                  className="w-full !mb-2"
-                  rules={[
-                    { required: true, message: "Durasi keuangan harus diisi" },
-                  ]}
-                >
-                  <Input
-                    className="!w-full"
-                    min={0}
-                    placeholder="Masukkan durasi"
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      form.setFieldsValue({ planDurationFinance: value });
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Deskripsi"
-                  name="planDescription"
-                  className="w-full !mb-2"
-                  rules={[{ required: true, message: "Deskripsi harus diisi" }]}
-                >
-                  <Input.TextArea placeholder="Deskripsi" />
-                </Form.Item>
-                <Form.Item
-                  label="Harga"
-                  name="planHarga"
-                  className="w-full !mb-2"
-                  rules={[{ required: true, message: "Harga harus diisi" }]}
-                >
-                  <Input
-                    className="!w-full"
-                    min={0}
-                    placeholder="Masukkan harga"
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      form.setFieldsValue({ harga: value });
-                    }}
-                  />
-                </Form.Item>
+                  <Form.Item
+                    label="Durasi Langganan (Hari)"
+                    name="planDuration"
+                    className="w-full !mb-2"
+                    rules={[{ required: true, message: "Durasi harus diisi" }]}
+                  >
+                    <Input
+                      className="!w-full"
+                      min={0}
+                      placeholder="Masukkan durasi"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+                        form.setFieldsValue({ planDuration: value });
+                      }}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label="Durasi Keuangan"
+                    name="planDurationFinance"
+                    className="w-full !mb-2"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Durasi keuangan harus diisi",
+                      },
+                    ]}
+                  >
+                    <Input
+                      className="!w-full"
+                      min={0}
+                      placeholder="Masukkan durasi"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+                        form.setFieldsValue({ planDurationFinance: value });
+                      }}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label="Deskripsi"
+                    name="planDescription"
+                    className="w-full !mb-2"
+                    rules={[
+                      { required: true, message: "Deskripsi harus diisi" },
+                    ]}
+                  >
+                    <Input.TextArea placeholder="Deskripsi" />
+                  </Form.Item>
+                  <Form.Item
+                    label="Harga"
+                    name="planHarga"
+                    className="w-full !mb-2"
+                    rules={[{ required: true, message: "Harga harus diisi" }]}
+                  >
+                    <Input
+                      className="!w-full"
+                      min={0}
+                      placeholder="Masukkan harga"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+                        form.setFieldsValue({ harga: value });
+                      }}
+                    />
+                  </Form.Item>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {[APP_TYPE.ECOMMERCE, APP_TYPE.ENTERPRISE, APP_TYPE.B2B].includes(
-            jenis
-          ) && (
-            <div className="mt-4 border rounded-lg p-4 space-y-3">
-              <p className="font-semibold text-xl">Atur Transaksi</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3">
-                <Form.Item
-                  name="type_per_transaction"
-                  label="Tipe Transaksi"
-                  className="!mb-2 w-full"
-                  rules={[
-                    { required: true, message: "Tipe transaksi harus diisi" },
-                  ]}
-                >
-                  <Select
-                    placeholder="Pilih Tipe"
-                    options={[
-                      { label: "Nominal", value: "nominal" },
-                      { label: "Percentage", value: "percentage" },
+          {!existingId &&
+            [APP_TYPE.ECOMMERCE, APP_TYPE.ENTERPRISE, APP_TYPE.B2B].includes(
+              jenis
+            ) && (
+              <div className="mt-4 border rounded-lg p-4 space-y-3">
+                <p className="font-semibold text-xl">Atur Transaksi</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3">
+                  <Form.Item
+                    name="type_per_transaction"
+                    label="Tipe Transaksi"
+                    className="!mb-2 w-full"
+                    rules={[
+                      { required: true, message: "Tipe transaksi harus diisi" },
                     ]}
-                  />
-                </Form.Item>
+                  >
+                    <Select
+                      placeholder="Pilih Tipe"
+                      options={[
+                        { label: "Nominal", value: "nominal" },
+                        { label: "Percentage", value: "percentage" },
+                      ]}
+                    />
+                  </Form.Item>
 
-                <Form.Item
-                  label="Fee Transaksi"
-                  name="fee_per_transaction"
-                  className="w-full !mb-2"
-                  rules={[
-                    { required: true, message: "Fee transaksi harus diisi" },
-                  ]}
-                >
-                  <Input
-                    className="!w-full"
-                    min={0}
-                    placeholder="Masukkan Fee"
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      form.setFieldsValue({ fee_per_transaction: value });
-                    }}
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  name="type_per_withdrawal"
-                  label="Tipe Withdrawal"
-                  className="!mb-2 w-full"
-                  rules={[
-                    { required: true, message: "Tipe withdrawal harus diisi" },
-                  ]}
-                >
-                  <Select
-                    placeholder="Pilih Tipe"
-                    options={[
-                      { label: "Nominal", value: "nominal" },
-                      { label: "Percentage", value: "percentage" },
+                  <Form.Item
+                    label="Fee Transaksi"
+                    name="fee_per_transaction"
+                    className="w-full !mb-2"
+                    rules={[
+                      { required: true, message: "Fee transaksi harus diisi" },
                     ]}
-                  />
-                </Form.Item>
+                  >
+                    <Input
+                      className="!w-full"
+                      min={0}
+                      placeholder="Masukkan Fee"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+                        form.setFieldsValue({ fee_per_transaction: value });
+                      }}
+                    />
+                  </Form.Item>
 
-                <Form.Item
-                  label="Fee Withdrawal"
-                  name="fee_per_withdrawal"
-                  className="w-full !mb-2"
-                  rules={[
-                    { required: true, message: "Fee withdrawal harus diisi" },
-                  ]}
-                >
-                  <Input
-                    className="!w-full"
-                    min={0}
-                    placeholder="Masukkan Fee"
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      form.setFieldsValue({ fee_per_withdrawal: value });
-                    }}
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  name="type_per_layanan"
-                  label="Tipe Layanan"
-                  className="!mb-2 w-full"
-                  rules={[
-                    { required: true, message: "Tipe layanan harus diisi" },
-                  ]}
-                >
-                  <Select
-                    placeholder="Pilih Tipe"
-                    options={[
-                      { label: "Nominal", value: "nominal" },
-                      { label: "Percentage", value: "percentage" },
+                  <Form.Item
+                    name="type_per_withdrawal"
+                    label="Tipe Withdrawal"
+                    className="!mb-2 w-full"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Tipe withdrawal harus diisi",
+                      },
                     ]}
-                  />
-                </Form.Item>
+                  >
+                    <Select
+                      placeholder="Pilih Tipe"
+                      options={[
+                        { label: "Nominal", value: "nominal" },
+                        { label: "Percentage", value: "percentage" },
+                      ]}
+                    />
+                  </Form.Item>
 
-                <Form.Item
-                  label="Fee Layanan"
-                  name="biaya_layanan"
-                  className="w-full !mb-2"
-                  rules={[
-                    { required: true, message: "Fee layanan harus diisi" },
-                  ]}
-                >
-                  <Input
-                    className="!w-full"
-                    min={0}
-                    placeholder="Masukkan Fee"
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "");
-                      form.setFieldsValue({ biaya_layanan: value });
-                    }}
-                  />
-                </Form.Item>
+                  <Form.Item
+                    label="Fee Withdrawal"
+                    name="fee_per_withdrawal"
+                    className="w-full !mb-2"
+                    rules={[
+                      { required: true, message: "Fee withdrawal harus diisi" },
+                    ]}
+                  >
+                    <Input
+                      className="!w-full"
+                      min={0}
+                      placeholder="Masukkan Fee"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+                        form.setFieldsValue({ fee_per_withdrawal: value });
+                      }}
+                    />
+                  </Form.Item>
+
+                  <Form.Item
+                    name="type_per_layanan"
+                    label="Tipe Layanan"
+                    className="!mb-2 w-full"
+                    rules={[
+                      { required: true, message: "Tipe layanan harus diisi" },
+                    ]}
+                  >
+                    <Select
+                      placeholder="Pilih Tipe"
+                      options={[
+                        { label: "Nominal", value: "nominal" },
+                        { label: "Percentage", value: "percentage" },
+                      ]}
+                    />
+                  </Form.Item>
+
+                  <Form.Item
+                    label="Fee Layanan"
+                    name="biaya_layanan"
+                    className="w-full !mb-2"
+                    rules={[
+                      { required: true, message: "Fee layanan harus diisi" },
+                    ]}
+                  >
+                    <Input
+                      className="!w-full"
+                      min={0}
+                      placeholder="Masukkan Fee"
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+                        form.setFieldsValue({ biaya_layanan: value });
+                      }}
+                    />
+                  </Form.Item>
+                </div>
               </div>
-            </div>
-          )}
+            )}
           <div className="flex justify-end mt-5">
             <Button loading={loading} htmlType="submit" type="primary">
               Simpan

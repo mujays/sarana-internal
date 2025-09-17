@@ -57,6 +57,11 @@ function useListSettlement({ page = 1, pageSize = 10 } = {}) {
       render: (value = "") => <p>{value}</p>,
     },
     {
+      title: "Client",
+      dataIndex: "client",
+      render: (value, record) => <p>{record.client?.nama || "-"}</p>,
+    },
+    {
       title: "By",
       dataIndex: "by",
       render: (value) => <p>{value || "-"}</p>,

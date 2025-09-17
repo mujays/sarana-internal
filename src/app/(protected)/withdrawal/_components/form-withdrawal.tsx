@@ -124,9 +124,9 @@ function FormWithdrawal({
           <Select
             placeholder="Pilih Status"
             options={[
-              { label: "Accepted", value: "accepted" },
+              { label: "Berhasil", value: "berhasil" },
               { label: "Pending", value: "pending" },
-              { label: "Succeeded", value: "succeeded" },
+              { label: "Failed", value: "failed" },
             ]}
           />
         </Form.Item>

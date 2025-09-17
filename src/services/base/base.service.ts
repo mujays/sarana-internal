@@ -207,7 +207,7 @@ const BaseService = {
   },
   getOneApp: async (appId: number, params?: any) => {
     const response = await axiosConfig.get<BaseResponseDto<AppType>>(
-      `/app/${appId}`,
+      `/admin/app/${appId}`,
       {
         params,
       }
