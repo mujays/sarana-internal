@@ -17,6 +17,20 @@ export type AppType = {
   deskripsi: string;
   name: string;
   jenis: string;
+  transaction_fee: {
+    id: number;
+    app_id: number;
+    split_rule_id: string | null;
+    fee_per_transaction: number;
+    fee_per_withdrawal: number;
+    biaya_layanan: number;
+    type_per_transaction: string;
+    type_per_withdrawal: string;
+    type_per_layanan: string;
+    created_at: string;
+    updated_at: string;
+  };
+  plan: PlanType[];
   created_at: string;
   updated_at: string;
 };

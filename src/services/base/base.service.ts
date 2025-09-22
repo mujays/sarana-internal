@@ -13,6 +13,15 @@ import {
 } from "./base.dto";
 
 const BaseService = {
+  getSelfBalance: async (params?: any) => {
+    const response = await axiosConfig.get<BaseResponsePaginate<any>>(
+      "/admin/self/balance",
+      {
+        params,
+      }
+    );
+    return response.data;
+  },
   getSubs: async (params: any) => {
     const response = await axiosConfig.get<
       BaseResponsePaginate<SubscribeType[]>

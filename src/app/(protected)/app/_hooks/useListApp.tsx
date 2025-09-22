@@ -20,6 +20,7 @@ function useListApp() {
       const response = await BaseService.getApp({
         page_size: 50,
         page: 1,
+        with: "transaction_fee,plan",
       });
       return response;
     },
