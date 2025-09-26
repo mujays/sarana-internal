@@ -77,6 +77,11 @@ function useListClient({ limit, page }: Props) {
       render: (value = "") => <p>{value}</p>,
     },
     {
+      title: "Status",
+      dataIndex: "status",
+      render: (value = "") => <p>{value}</p>,
+    },
+    {
       title: "No PIC",
       dataIndex: "no_telp_pic",
       render: (value = "") => <p>{value || "-"}</p>,
