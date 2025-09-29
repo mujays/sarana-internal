@@ -27,6 +27,7 @@ export type AppType = {
     type_per_transaction: string;
     type_per_withdrawal: string;
     type_per_layanan: string;
+    charged_to: string;
     created_at: string;
     updated_at: string;
   };
