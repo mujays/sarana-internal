@@ -5,7 +5,7 @@ import BaseService from "@/services/base/base.service";
 import { useQuery } from "@tanstack/react-query";
 
 function DashboardPage() {
-  const { data: balance, isLoading } = useQuery({
+  const { data: balance } = useQuery({
     queryKey: ["SELF_BALANCE"],
     queryFn: async () => {
       const response = await BaseService.getSelfBalance();
