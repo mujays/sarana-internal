@@ -74,7 +74,7 @@ export function AppDetail({ appData }: { appData: AppType }) {
             </div>
           </div>
         )}
-        {appData.plan.length > 0 && (
+        {appData?.plan?.length > 0 && (
           <div className="mb-3 mt-4 pt-4 border-t">
             <p className="font-semibold text-xl">Plan</p>
             <div className="grid grid-cols-2 gap-2 mb-3">
