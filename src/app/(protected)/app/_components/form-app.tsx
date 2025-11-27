@@ -68,6 +68,7 @@ function FormApp({ existingId }: { existingId?: number | null }) {
               fee_per_withdrawal: +val?.fee_per_withdrawal,
               type_per_layanan: val?.type_per_layanan,
               biaya_layanan: +val?.biaya_layanan,
+              charged_to: val?.charged_to,
             }
           : undefined,
       };
@@ -108,6 +109,7 @@ function FormApp({ existingId }: { existingId?: number | null }) {
           fee_per_withdrawal: app.data.transaction_fee?.fee_per_withdrawal,
           type_per_layanan: app.data.transaction_fee?.type_per_layanan,
           biaya_layanan: app.data.transaction_fee?.biaya_layanan,
+          charged_to: app.data.transaction_fee?.charged_to,
         });
       }
       if (app.data.plan.length) {
@@ -155,6 +157,7 @@ function FormApp({ existingId }: { existingId?: number | null }) {
               label="Deskripsi"
               name="deskripsi"
               className="w-full !mb-2"
+              rules={[{ required: true, message: "Deskripsi harus diisi" }]}
             >
               <Input.TextArea placeholder="Deskripsi" />
             </Form.Item>
@@ -380,6 +383,23 @@ function FormApp({ existingId }: { existingId?: number | null }) {
                       const value = e.target.value.replace(/\D/g, "");
                       form.setFieldsValue({ biaya_layanan: value });
                     }}
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  name="charged_to"
+                  label="Ditanggungoleh"
+                  className="!mb-2 w-full"
+                  rules={[
+                    { required: true, message: "Ditanggungoleh harus diisi" },
+                  ]}
+                >
+                  <Select
+                    placeholder="Pilih Tipe"
+                    options={[
+                      { label: "User", value: "user" },
+                      { label: "Company", value: "company" },
+                    ]}
                   />
                 </Form.Item>
               </div>

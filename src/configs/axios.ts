@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/session";
+import { getSession, logout } from "@/lib/session";
 import axios, { AxiosError } from "axios";
 
 const API_VERSION = "/api/v1";
@@ -32,7 +32,7 @@ axiosConfig.interceptors.response.use(
       if (error.response.status === 401) {
         // * Unauthorized
         try {
-          // logout();
+          logout();
           window.location.href = "/";
         } catch (_error) {
           return Promise.reject(_error);
